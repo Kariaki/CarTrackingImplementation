@@ -22,4 +22,5 @@ public class DriverRepository  implements DriverDao {
     public Driver getDriverById(String id) {
         return drivers.stream().filter(driver -> driver.getId().equals(id)).findFirst().orElseThrow();
     }
+
 }

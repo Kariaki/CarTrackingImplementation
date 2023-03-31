@@ -4,6 +4,7 @@ import org.example.data.dao.CompanyDao;
 import org.example.data.dao.DriverDao;
 import org.example.data.dao.ManagerDao;
 import org.example.data.dao.VehicleDao;
+import org.example.data.model.Driver;
 import org.example.data.model.Manager;
 import org.example.data.model.Vehicle;
 import org.example.data.model.VehiclePosition;
@@ -27,8 +28,13 @@ public class VehicleTrackingController {
     }
 
     VehiclePosition trackVehicle(String id){
-       return vehicleDao.getCurrentLocation(id);
+       try{
+           return vehicleDao.getCurrentLocation(id);
+       }catch (Exception e){
+           return null;
+       }
     }
+
     void addVehicle(Vehicle vehicle){
         vehicleDao.addVehicle(vehicle);
     }
@@ -38,5 +44,16 @@ public class VehicleTrackingController {
     }
     List<Manager> getManagersByCompanyId(String companyId) {
         return managerDao.getManagerByCompanyId(companyId);
+    }
+    List<Driver> getDriverByCompanyId(String companyId) {
+        return driverDao.getCompanyDrivers(companyId);
+    }
+
+    Driver getDriverById(String id){
+        try{
+           return driverDao.getDriverById(id);
+        }catch (Exception e){
+            return null;
+        }
     }
 }
